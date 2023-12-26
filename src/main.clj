@@ -1,18 +1,30 @@
 (ns sqrt-site.main
   (:gen-class)
-  (:require [ring.adapter.jetty :as jetty]))
+  (:require [ring.adapter.jetty :as jetty]
+            [reitit.ring :as ring]
+            [ring.util.http-response :as response]
+            [ring.middleware.defaults :as defaults]))
 
 (defonce server (atom nil))
 
-(defn handler [request]
-  {:status 200
-   :body "To be implemented"})
+(defn html-response [content]
+  (-> (response/ok content)
+      (response/content-type "text/html")))
+
+(defn home-page [request]
+  (html-response "<h1>Home Page</h1>"))
+
+(def handler
+  (ring/ring-handler
+   (ring/router
+    ["/" {:get home-page}])))
 
 (defn start! []
   (reset!
    server
-   (jetty/run-jetty (-> #'handler) {:join? false
-                                    :port 8080})))
+   (jetty/run-jetty (-> #'handler (defaults/wrap-defaults defaults/site-defaults) )
+                    {:join? false
+                     :port 8080})))
 
 (defn stop! []
   (.stop @server)
