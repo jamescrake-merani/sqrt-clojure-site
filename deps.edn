@@ -2,5 +2,5 @@
 {:paths ["src"]
  :deps {ring/ring-jetty-adapter {:mvn/version "1.11.0"}
         ring/ring-defaults {:mvn/version "0.4.0"}
-        metosin/reitit-ring {:mvn/version "0.7.0-alpha7"}}
- }
+        metosin/reitit-ring {:mvn/version "0.7.0-alpha7"}
+        metosin/ring-http-response {:mvn/version "0.9.3"}}}
