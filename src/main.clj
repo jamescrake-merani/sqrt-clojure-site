@@ -14,10 +14,14 @@
 (defn home-page [request]
   (html-response "<h1>Home Page</h1>"))
 
+(defn about-page [request]
+  (html-response "<h1>About Page</h1>"))
+
 (def handler
   (ring/ring-handler
    (ring/router
-    ["/" {:get home-page}])))
+    [["/" {:get home-page}]
+     ["/about" {:get about-page}]])))
 
 (defn start! []
   (reset!
