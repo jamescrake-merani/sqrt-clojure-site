@@ -3,19 +3,21 @@
   (:require [ring.adapter.jetty :as jetty]
             [reitit.ring :as ring]
             [ring.util.http-response :as response]
-            [ring.middleware.defaults :as defaults]))
+            [ring.middleware.defaults :as defaults]
+            [sqrt-site.views :as views]))
 
 (defonce server (atom nil))
 
 (defn html-response [content]
-  (-> (response/ok content)
+  (-> (str content)
+      response/ok
       (response/content-type "text/html")))
 
 (defn home-page [request]
-  (html-response "<h1>Home Page</h1>"))
+  (html-response (views/home-view)))
 
 (defn about-page [request]
-  (html-response "<h1>About Page</h1>"))
+  (html-response (views/about-view)))
 
 (def handler
   (ring/ring-handler
