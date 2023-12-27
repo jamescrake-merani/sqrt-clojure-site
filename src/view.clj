@@ -1,5 +1,6 @@
 (ns sqrt-site.views
-  (:require [hiccup2.core :as h]))
+  (:require [hiccup2.core :as h]
+            [ring.util.anti-forgery :as af]))
 
 (defn template [current-page]
   (h/html
@@ -15,12 +16,20 @@
       [:hr]
       current-page]]]))
 
+(defn sqrt-form []
+  (h/html
+   [:form {:method "POST"}
+    (h/raw (af/anti-forgery-field))
+    [:input.form-control {:type "number"}]
+    [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
+
 (defn home-view []
   (template
    (h/html
     [:div
      [:h1 "This is the home page"]
-     [:p "It doesn't have anything on it at the moment."]])))
+     [:p "It doesn't have anything on it at the moment."]
+     (sqrt-form)])))
 
 (defn about-view []
   (template
