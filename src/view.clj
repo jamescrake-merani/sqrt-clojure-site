@@ -1,6 +1,8 @@
 (ns sqrt-site.views
   (:require [hiccup2.core :as h]
-            [ring.util.anti-forgery :as af]))
+            [ring.util.anti-forgery :as af]
+            [sqrt-site.newton :as newton]
+            [clojure.math :as math]))
 
 (defn template [current-page]
   (h/html
@@ -29,8 +31,20 @@
     [:div
      [:h1 "This is the home page"]
      [:p "It doesn't have anything on it at the moment."]
-     [:p to-sqrt]
-     (sqrt-form)])))
+     (sqrt-form)
+     (when-not (nil? to-sqrt)
+       [:div
+        [:hr]
+        (sqrt-calc-view (parse-double to-sqrt))])])))
+
+(defn value-card [value to-sqrt]
+  [:div
+   [:p "Estimation: " value " " (math/pow value 2)]])
+
+(defn sqrt-calc-view [to-sqrt]
+  (let [sqrt-steps (newton/sqrt to-sqrt 0.01)]
+    (doall
+     (map #(value-card % to-sqrt) sqrt-steps))))
 
 (defn about-view []
   (template
