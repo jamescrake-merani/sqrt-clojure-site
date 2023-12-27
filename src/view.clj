@@ -20,15 +20,16 @@
   (h/html
    [:form {:method "POST"}
     (h/raw (af/anti-forgery-field))
-    [:input.form-control {:type "number" :value "to-sqrt"}]
+    [:input.form-control {:type "number" :name "to-sqrt"}]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
-(defn home-view []
+(defn home-view [to-sqrt]
   (template
    (h/html
     [:div
      [:h1 "This is the home page"]
      [:p "It doesn't have anything on it at the moment."]
+     [:p to-sqrt]
      (sqrt-form)])))
 
 (defn about-view []
