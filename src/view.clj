@@ -18,12 +18,12 @@
       [:hr]
       current-page]]]))
 
-(defn sqrt-form []
+(defn sqrt-form [initial-to-sqrt initial-precision]
   (h/html
    [:form {:method "POST"}
     (h/raw (af/anti-forgery-field))
-    [:input.form-control {:type "number" :name "to-sqrt" :placeholder "Enter a number find the square root of"}]
-    [:input.form-control {:type "number" :name "precision" :placeholder "Enter the precision" :value 0.01 :step :any :max 1}]
+    [:input.form-control {:type "number" :name "to-sqrt" :placeholder "Enter a number find the square root of" :value initial-to-sqrt}]
+    [:input.form-control {:type "number" :name "precision" :placeholder "Enter the precision" :value initial-precision :step :any :max 1 }]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
 (defn home-view [to-sqrt precision]
@@ -32,7 +32,7 @@
     [:div
      [:h1 "This is the home page"]
      [:p "It doesn't have anything on it at the moment."]
-     (sqrt-form)
+     (sqrt-form to-sqrt precision)
      (when-not (nil? to-sqrt)
        [:div
         [:hr]
