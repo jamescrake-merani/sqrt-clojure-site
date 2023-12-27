@@ -15,7 +15,8 @@
 
 (defn home-page [request]
   (html-response (views/home-view
-                  (get-in request [:params :to-sqrt] nil))))
+                  (get-in request [:params :to-sqrt] nil)
+                  (get-in request [:params :precision] nil))))
 
 (defn about-page [request]
   (html-response (views/about-view)))

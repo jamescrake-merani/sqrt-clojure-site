@@ -22,10 +22,11 @@
   (h/html
    [:form {:method "POST"}
     (h/raw (af/anti-forgery-field))
-    [:input.form-control {:type "number" :name "to-sqrt"}]
+    [:input.form-control {:type "number" :name "to-sqrt" :placeholder "Enter a number find the square root of"}]
+    [:input.form-control {:type "number" :name "precision" :placeholder "Enter the precision" :value 0.01 :step :any :max 1}]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
-(defn home-view [to-sqrt]
+(defn home-view [to-sqrt precision]
   (template
    (h/html
     [:div
@@ -35,7 +36,7 @@
      (when-not (nil? to-sqrt)
        [:div
         [:hr]
-        (sqrt-calc-view (parse-double to-sqrt))])])))
+        (sqrt-calc-view (parse-double to-sqrt) (parse-double precision))])])))
 
 (defn value-card [value to-sqrt precision]
   [:div.card {:class (if (newton/good-enough? value to-sqrt precision)
@@ -45,9 +46,8 @@
    [:div.card-body
     [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
 
-(defn sqrt-calc-view [to-sqrt]
-  (let [precision 0.01
-        sqrt-steps (newton/sqrt to-sqrt precision)]
+(defn sqrt-calc-view [to-sqrt precision]
+  (let [sqrt-steps (newton/sqrt to-sqrt precision)]
     (doall
      (map #(value-card % to-sqrt precision) sqrt-steps))))
 
