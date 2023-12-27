@@ -38,8 +38,10 @@
         (sqrt-calc-view (parse-double to-sqrt))])])))
 
 (defn value-card [value to-sqrt]
-  [:div
-   [:p "Estimation: " value " " (math/pow value 2)]])
+  [:div.card
+   [:div.card-header "Attempt"]
+   [:div.card-body
+    [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
 
 (defn sqrt-calc-view [to-sqrt]
   (let [sqrt-steps (newton/sqrt to-sqrt 0.01)]
