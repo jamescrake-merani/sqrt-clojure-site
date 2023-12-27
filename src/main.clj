@@ -14,7 +14,8 @@
       (response/content-type "text/html")))
 
 (defn home-page [request]
-  (html-response (views/home-view)))
+  (html-response (views/home-view
+                  (get-in request [:params :to-sqrt] nil))))
 
 (defn about-page [request]
   (html-response (views/about-view)))
