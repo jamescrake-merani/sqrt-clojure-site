@@ -20,7 +20,7 @@
   (h/html
    [:form {:method "POST"}
     (h/raw (af/anti-forgery-field))
-    [:input.form-control {:type "number"}]
+    [:input.form-control {:type "number" :value "to-sqrt"}]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
 (defn home-view []
