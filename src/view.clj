@@ -37,16 +37,19 @@
         [:hr]
         (sqrt-calc-view (parse-double to-sqrt))])])))
 
-(defn value-card [value to-sqrt]
-  [:div.card
+(defn value-card [value to-sqrt precision]
+  [:div.card {:class (if (newton/good-enough? value to-sqrt precision)
+                       "text-bg-success"
+                       "text-bg-secondary")}
    [:div.card-header "Attempt"]
    [:div.card-body
     [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
 
 (defn sqrt-calc-view [to-sqrt]
-  (let [sqrt-steps (newton/sqrt to-sqrt 0.01)]
+  (let [precision 0.01
+        sqrt-steps (newton/sqrt to-sqrt precision)]
     (doall
-     (map #(value-card % to-sqrt) sqrt-steps))))
+     (map #(value-card % to-sqrt precision) sqrt-steps))))
 
 (defn about-view []
   (template
