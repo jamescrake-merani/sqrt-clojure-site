@@ -22,7 +22,7 @@
 (def handler
   (ring/ring-handler
    (ring/router
-    [["/" {:get home-page}]
+    [["/" {:get home-page :post home-page}]
      ["/about" {:get about-page}]])))
 
 (defn start! []
