@@ -24,17 +24,23 @@
     (h/raw (af/anti-forgery-field))
     [:div.row
      [:div.col
-      [:input.form-control {:type "number"
-                            :name "to-sqrt"
-                            :placeholder "Enter a number find the square root of"
-                            :value initial-to-sqrt}]]
+      [:label.form-label {:for "sqrt-input"} "Number to square root:"]
+      [:input.form-control
+       {:id "sqrt-input"
+        :type "number"
+        :name "to-sqrt"
+        :placeholder "Enter a number find the square root of"
+        :value initial-to-sqrt}]]
      [:div.col
-      [:input.form-control {:type "number"
-                            :name "precision"
-                            :placeholder "Enter the precision"
-                            :value initial-precision
-                            :step :any
-                            :max 1}]]]
+      [:label.form-label {:for "precision-input"} "Precision:"]
+      [:input.form-control
+       {:id "precision-input"
+        :type "number"
+        :name "precision"
+        :placeholder "Enter the precision"
+        :value initial-precision
+        :step :any
+        :max 1}]]]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
 (defn value-card [value to-sqrt precision]
