@@ -4,7 +4,8 @@
             [reitit.ring :as ring]
             [ring.util.http-response :as response]
             [ring.middleware.defaults :as defaults]
-            [sqrt-site.views :as views]))
+            [sqrt-site.views :as views]
+            [clojure.math :as math]))
 
 (defonce server (atom nil))
 
