@@ -22,8 +22,19 @@
   (h/html
    [:form {:method "POST"}
     (h/raw (af/anti-forgery-field))
-    [:input.form-control {:type "number" :name "to-sqrt" :placeholder "Enter a number find the square root of" :value initial-to-sqrt}]
-    [:input.form-control {:type "number" :name "precision" :placeholder "Enter the precision" :value initial-precision :step :any :max 1 }]
+    [:div.row
+     [:div.col
+      [:input.form-control {:type "number"
+                            :name "to-sqrt"
+                            :placeholder "Enter a number find the square root of"
+                            :value initial-to-sqrt}]]
+     [:div.col
+      [:input.form-control {:type "number"
+                            :name "precision"
+                            :placeholder "Enter the precision"
+                            :value initial-precision
+                            :step :any
+                            :max 1}]]]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
 (defn value-card [value to-sqrt precision]
