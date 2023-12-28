@@ -14,7 +14,7 @@
              :crossorigin "anonymous"}]]
     [:body
      [:div.container
-      [:h1 "Template"]
+      [:h1.text-center "Square Root Website"]
       [:hr]
       current-page]]]))
 
@@ -25,6 +25,20 @@
     [:input.form-control {:type "number" :name "to-sqrt" :placeholder "Enter a number find the square root of" :value initial-to-sqrt}]
     [:input.form-control {:type "number" :name "precision" :placeholder "Enter the precision" :value initial-precision :step :any :max 1 }]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
+
+(defn value-card [value to-sqrt precision]
+  [:div.card {:class (if (newton/good-enough? value to-sqrt precision)
+                       "text-bg-success"
+                       "text-bg-secondary")}
+   [:div.card-header "Attempt"]
+   [:div.card-body
+    [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
+
+
+(defn sqrt-calc-view [to-sqrt precision]
+  (let [sqrt-steps (newton/sqrt to-sqrt precision)]
+    (doall
+     (map #(value-card % to-sqrt precision) sqrt-steps))))
 
 (defn home-view [to-sqrt precision]
   (template
@@ -37,19 +51,6 @@
        [:div
         [:hr]
         (sqrt-calc-view (parse-double to-sqrt) (parse-double precision))])])))
-
-(defn value-card [value to-sqrt precision]
-  [:div.card {:class (if (newton/good-enough? value to-sqrt precision)
-                       "text-bg-success"
-                       "text-bg-secondary")}
-   [:div.card-header "Attempt"]
-   [:div.card-body
-    [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
-
-(defn sqrt-calc-view [to-sqrt precision]
-  (let [sqrt-steps (newton/sqrt to-sqrt precision)]
-    (doall
-     (map #(value-card % to-sqrt precision) sqrt-steps))))
 
 (defn about-view []
   (template
