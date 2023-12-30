@@ -16,7 +16,7 @@
   "Returns a boolean of whether the request is valid"
   [to-sqrt precision]
   (and
-   (verify-precision precision)
-   (verify-to-sqrt to-sqrt)
+   (not (nil? to-sqrt))
    (not (nil? precision))
-   (not (nil? to-sqrt))))
+   (verify-precision precision)
+   (verify-to-sqrt to-sqrt)))
