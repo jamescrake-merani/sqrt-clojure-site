@@ -23,6 +23,9 @@
    [:div.alert.alert-danger
     error-msg]))
 
+(defn format-default-value [x]
+  (format "%f" x))
+
 (defn sqrt-form [initial-to-sqrt initial-precision]
   (h/html
    [:form {:method "POST"}
@@ -36,7 +39,7 @@
         :name "to-sqrt"
         :placeholder "Enter a number find the square root of"
         :required true
-        :value initial-to-sqrt}]]
+        :value (format-default-value  initial-to-sqrt)}]]
      [:div.col
       [:label.form-label {:for "precision-input"} "Precision:"]
       [:input.form-control
@@ -44,7 +47,7 @@
         :type "number"
         :name "precision"
         :placeholder "Enter the precision"
-        :value initial-precision
+        :value (format-default-value initial-precision)
         :required true
         :step :any
         :max 1}]]]
