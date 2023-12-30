@@ -2,7 +2,8 @@
   (:require [hiccup2.core :as h]
             [ring.util.anti-forgery :as af]
             [sqrt-site.newton :as newton]
-            [clojure.math :as math]))
+            [clojure.math :as math]
+            [sqrt-site.verification :as verify]))
 
 (defn template [current-page]
   (h/html
@@ -39,7 +40,10 @@
         :name "to-sqrt"
         :placeholder "Enter a number find the square root of"
         :required true
-        :value (format-default-value  initial-to-sqrt)}]]
+        :value (format-default-value  initial-to-sqrt)
+        :step :any
+        :max verify/to-sqrt-max
+        :min verify/to-sqrt-min}]]
      [:div.col
       [:label.form-label {:for "precision-input"} "Precision:"]
       [:input.form-control
@@ -50,7 +54,8 @@
         :value (format-default-value initial-precision)
         :required true
         :step :any
-        :max 1}]]]
+        :max verify/precision-max
+        :min verify/precision-min}]]]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
 (defn value-card [value to-sqrt precision]
