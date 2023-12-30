@@ -18,6 +18,11 @@
       [:hr]
       current-page]]]))
 
+(defn error-alert [error-msg]
+  (h/html
+   [:div.alert.alert-danger
+    error-msg]))
+
 (defn sqrt-form [initial-to-sqrt initial-precision]
   (h/html
    [:form {:method "POST"}
