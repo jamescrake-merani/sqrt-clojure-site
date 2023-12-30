@@ -15,7 +15,7 @@
              :crossorigin "anonymous"}]]
     [:body
      [:div.container
-      [:h1.text-center "Square Root Website"]
+      [:h1.text-center "Square Root with the Newton Method"]
       [:hr]
       current-page]]]))
 
@@ -75,8 +75,9 @@
   (template
    (h/html
     [:div
-     [:h1 "This is the home page"]
-     [:p "It doesn't have anything on it at the moment."]
+     [:h1 "Calculation Form"]
+     [:p "Enter a number to square root, and the precision desired. Then click
+     calculate to see the estimations for the square root of that number."]
      (sqrt-form to-sqrt precision)
      [:hr]
      (when-not (nil? sqrt-steps)
