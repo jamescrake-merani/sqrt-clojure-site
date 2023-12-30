@@ -59,22 +59,22 @@
     [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
 
 
-(defn sqrt-calc-view [to-sqrt precision]
-  (let [sqrt-steps (newton/sqrt to-sqrt precision)]
-    (doall
-     (map #(value-card % to-sqrt precision) sqrt-steps))))
+(defn sqrt-calc-view [to-sqrt precision sqrt-steps]
+  (doall
+    (map #(value-card % to-sqrt precision) sqrt-steps)))
 
-(defn home-view [to-sqrt precision]
+(defn home-view [to-sqrt precision sqrt-steps error-msg]
   (template
    (h/html
     [:div
      [:h1 "This is the home page"]
      [:p "It doesn't have anything on it at the moment."]
      (sqrt-form to-sqrt precision)
-     (when-not (nil? to-sqrt)
-       [:div
-        [:hr]
-        (sqrt-calc-view (parse-double to-sqrt) (parse-double precision))])])))
+     [:hr]
+     (when-not (nil? sqrt-steps)
+       (sqrt-calc-view to-sqrt precision sqrt-steps))
+     (when-not (nil? error-msg)
+       (error-alert error-msg))])))
 
 (defn about-view []
   (template
