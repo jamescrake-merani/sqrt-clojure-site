@@ -17,4 +17,6 @@
   [to-sqrt precision]
   (and
    (verify-precision precision)
-   (verify-to-sqrt to-sqrt)))
+   (verify-to-sqrt to-sqrt)
+   (not (nil? precision))
+   (not (nil? to-sqrt))))
