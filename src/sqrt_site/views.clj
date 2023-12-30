@@ -30,6 +30,7 @@
         :type "number"
         :name "to-sqrt"
         :placeholder "Enter a number find the square root of"
+        :required true
         :value initial-to-sqrt}]]
      [:div.col
       [:label.form-label {:for "precision-input"} "Precision:"]
@@ -39,6 +40,7 @@
         :name "precision"
         :placeholder "Enter the precision"
         :value initial-precision
+        :required true
         :step :any
         :max 1}]]]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
