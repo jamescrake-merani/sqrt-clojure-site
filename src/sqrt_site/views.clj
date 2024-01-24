@@ -3,7 +3,8 @@
             [ring.util.anti-forgery :as af]
             [sqrt-site.newton :as newton]
             [clojure.math :as math]
-            [sqrt-site.verification :as verify]))
+            [sqrt-site.verification :as verify]
+            [clojure.pprint :refer [cl-format]]))
 
 (defn template [current-page]
   (h/html
@@ -25,7 +26,7 @@
     error-msg]))
 
 (defn format-default-value [x]
-  (format "%f" x))
+  (cl-format nil "~D" x))
 
 (defn sqrt-form [initial-to-sqrt initial-precision]
   (h/html
