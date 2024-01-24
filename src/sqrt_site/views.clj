@@ -59,18 +59,18 @@
         :min verify/precision-min}]]]
     [:button.btn.btn-primary {:type "submit"} "Calculate"]]))
 
-(defn value-card [value to-sqrt precision]
+(defn value-card [value to-sqrt precision attempt-no]
   [:div.card {:class (if (newton/good-enough? value to-sqrt precision)
                        "text-bg-success"
                        "text-bg-secondary")}
-   [:div.card-header "Attempt"]
+   [:div.card-header "Attempt #" attempt-no]
    [:div.card-body
-    [:p.card-text (format "√%s ≈ %s" to-sqrt value)] ]])
+    [:p.card-text (format "√%s ≈ %s" to-sqrt value)]]])
 
 
 (defn sqrt-calc-view [to-sqrt precision sqrt-steps]
   (doall
-    (map #(value-card % to-sqrt precision) sqrt-steps)))
+   (map #(value-card %1 to-sqrt precision %2) sqrt-steps (range 1 (inc (count sqrt-steps))))))
 
 (defn home-view [to-sqrt precision sqrt-steps error-msg]
   (template
