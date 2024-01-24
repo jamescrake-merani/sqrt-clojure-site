@@ -17,6 +17,9 @@
     [:body
      [:div.container
       [:h1.text-center "Square Root with the Newton Method"]
+      [:a {:href "/"} "Home"]
+      " "
+      [:a {:href "/about"} "About"]
       [:hr]
       current-page]]]))
 
