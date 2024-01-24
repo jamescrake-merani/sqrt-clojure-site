@@ -65,7 +65,9 @@
                        "text-bg-secondary")}
    [:div.card-header "Attempt #" attempt-no]
    [:div.card-body
-    [:p.card-text (format "√%s ≈ %s" to-sqrt value)]]])
+    [:p.card-text (format "√%s ≈ %s" to-sqrt value)
+     [:br]
+     (cl-format nil "± ~D" (abs (- (math/pow value 2) to-sqrt)))]]])
 
 
 (defn sqrt-calc-view [to-sqrt precision sqrt-steps]
