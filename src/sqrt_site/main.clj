@@ -16,15 +16,16 @@
       response/ok
       (response/content-type "text/html")))
 
-(defn parse-input [x]
-  (when-not (nil? x)
+(defn parse-input [x default]
+  (if (nil? x)
+    default
     (parse-double x)))
 
 (defn home-page [request]
   (let [input-to-sqrt (get-in request [:params :to-sqrt] nil)
-        to-sqrt (parse-input input-to-sqrt)
+        to-sqrt (parse-input input-to-sqrt nil)
         input-precision (get-in request [:params :precision] nil)
-        precision (parse-input input-precision)
+        precision (parse-input input-precision 0.01)
         is-valid? (verify/verify-request to-sqrt precision)
         is-post? (= (:request-method request) :post)
         sqrt-steps (when (and is-post? is-valid?)
