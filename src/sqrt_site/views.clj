@@ -98,4 +98,13 @@
      [:h1 "About Page"]
      [:p "The Newton Method is a method for calculating the square root of a
      particular number. It starts with a guess, and then improves on that guess
-     until it is as accurate as we specify."]])))
+     until it is as accurate as we specify."]
+     [:h2 "Further Reading"]
+     [:ul
+      [:li "I personally discovered this method through reading the
+       excellent " [:a
+                    {:href "https://web.mit.edu/6.001/6.037/sicp.pdf"}
+                    [:i "Structure and Interpretation of Computer Programs"]]]
+      [:li "Alternatively, you may also find the "
+       [:a
+        {:href "https://en.wikipedia.org/wiki/Newton%27s_method"} "Wikipedia Article" ] " helpful."]]])))
