@@ -96,5 +96,6 @@
    (h/html
     [:div
      [:h1 "About Page"]
-     [:p "This will eventually have a description of Newton's method of
-     calculating the sqrt but right now is empty"]])))
+     [:p "The Newton Method is a method for calculating the square root of a
+     particular number. It starts with a guess, and then improves on that guess
+     until it is as accurate as we specify."]])))
