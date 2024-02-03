@@ -13,7 +13,10 @@
      [:link {:rel "stylesheet"
              :href "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
              :integrity "sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-             :crossorigin "anonymous"}]]
+             :crossorigin "anonymous"}]
+     [:script {:src "https://unpkg.com/htmx.org@1.9.10"
+               :integrity "sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+               :crossorigin "anonymous"}]]
     [:body
      [:div.container
       [:h1.text-center "Square Root with the Newton Method"]
