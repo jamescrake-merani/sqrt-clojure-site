@@ -77,8 +77,9 @@
 
 
 (defn sqrt-calc-view [to-sqrt precision sqrt-steps]
-  (doall
-   (map #(value-card %1 to-sqrt precision %2) sqrt-steps (range 1 (inc (count sqrt-steps))))))
+  (h/html
+   (doall
+    (map #(value-card %1 to-sqrt precision %2) sqrt-steps (range 1 (inc (count sqrt-steps)))))))
 
 (defn home-view [to-sqrt precision sqrt-steps error-msg]
   (template
