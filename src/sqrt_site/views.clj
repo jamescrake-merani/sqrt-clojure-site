@@ -36,7 +36,7 @@
 
 (defn sqrt-form [initial-to-sqrt initial-precision]
   (h/html
-   [:form {:method "POST"}
+   [:form {:method "POST" :hx-post "/calc" :hx-target "#response-area"}
     (h/raw (af/anti-forgery-field))
     [:div.row
      [:div.col
@@ -89,6 +89,7 @@
      calculate to see the estimations for the square root of that number."]
      (sqrt-form to-sqrt precision)
      [:hr]
+     [:div#response-area]
      (when-not (nil? sqrt-steps)
        (sqrt-calc-view to-sqrt precision sqrt-steps))
      (when-not (nil? error-msg)
