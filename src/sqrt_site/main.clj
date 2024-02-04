@@ -42,11 +42,20 @@
 (defn about-page [request]
   (html-response (views/about-view)))
 
+(defn sqrt-post [request]
+  (let [to-sqrt (-> (get-in request [:params :to-sqrt] nil) parse-input)
+        precision (-> (get-in request [:params :precision] nil) parse-input)
+        response (if (verify/verify-request to-sqrt precision)
+                   (views/sqrt-calc-view to-sqrt precision (newton/sqrt to-sqrt precision))
+                   (views/error-alert "There was an error processing this request."))]
+    (html-response response)))
+
 (def handler
   (ring/ring-handler
    (ring/router
     [["/" {:get home-page :post home-page}]
-     ["/about" {:get about-page}]])))
+     ["/about" {:get about-page}]
+     ["/calc" {:post sqrt-post}]])))
 
 (defn start! []
   (reset!
