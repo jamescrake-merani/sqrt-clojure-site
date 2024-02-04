@@ -16,36 +16,32 @@
       response/ok
       (response/content-type "text/html")))
 
-(defn parse-input [x default]
-  (if (nil? x)
-    default
-    (parse-double x)))
+(defn parse-input
+  ( [x default] (if (nil? x)
+                  default
+                  (parse-double x)))
+  ( [x] (parse-input x nil)))
 
 (defn home-page [request]
-  (let [input-to-sqrt (get-in request [:params :to-sqrt] nil)
-        to-sqrt (parse-input input-to-sqrt nil)
-        input-precision (get-in request [:params :precision] nil)
-        precision (parse-input input-precision 0.01)
-        is-valid? (verify/verify-request to-sqrt precision)
-        is-post? (= (:request-method request) :post)
-        sqrt-steps (when (and is-post? is-valid?)
-                     (newton/sqrt to-sqrt precision))
-        error-msg (when (and is-post? (not is-valid?))
-                    "Validation failed on the request")]
-    (html-response (views/home-view
-                    to-sqrt
-                    precision
-                    sqrt-steps
-                    error-msg))))
+  (html-response (views/home-view)))
 
 (defn about-page [request]
   (html-response (views/about-view)))
+
+(defn sqrt-post [request]
+  (let [to-sqrt (-> (get-in request [:params :to-sqrt] nil) parse-input)
+        precision (-> (get-in request [:params :precision] nil) parse-input)
+        response (if (verify/verify-request to-sqrt precision)
+                   (views/sqrt-calc-view to-sqrt precision (newton/sqrt to-sqrt precision))
+                   (views/error-alert "There was an error processing this request."))]
+    (html-response response)))
 
 (def handler
   (ring/ring-handler
    (ring/router
     [["/" {:get home-page :post home-page}]
-     ["/about" {:get about-page}]])))
+     ["/about" {:get about-page}]
+     ["/calc" {:post sqrt-post}]])))
 
 (defn start! []
   (reset!
