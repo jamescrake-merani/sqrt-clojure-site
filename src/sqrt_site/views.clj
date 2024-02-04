@@ -81,20 +81,16 @@
    (doall
     (map #(value-card %1 to-sqrt precision %2) sqrt-steps (range 1 (inc (count sqrt-steps)))))))
 
-(defn home-view [to-sqrt precision sqrt-steps error-msg]
+(defn home-view []
   (template
    (h/html
     [:div
      [:h1 "Calculation Form"]
      [:p "Enter a number to square root, and the precision desired. Then click
      calculate to see the estimations for the square root of that number."]
-     (sqrt-form to-sqrt precision)
+     (sqrt-form nil 0.01)
      [:hr]
-     [:div#response-area]
-     (when-not (nil? sqrt-steps)
-       (sqrt-calc-view to-sqrt precision sqrt-steps))
-     (when-not (nil? error-msg)
-       (error-alert error-msg))])))
+     [:div#response-area]])))
 
 (defn about-view []
   (template
