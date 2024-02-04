@@ -16,10 +16,11 @@
       response/ok
       (response/content-type "text/html")))
 
-(defn parse-input [x default]
-  (if (nil? x)
-    default
-    (parse-double x)))
+(defn parse-input
+  ( [x default] (if (nil? x)
+                  default
+                  (parse-double x)))
+  ( [x] (parse-input x nil)))
 
 (defn home-page [request]
   (let [input-to-sqrt (get-in request [:params :to-sqrt] nil)
